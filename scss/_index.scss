@@ -1,0 +1,31 @@
+.contenedor {
+    width: 100%;
+    height: 40rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .contenedor_2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        input {
+            border-radius: 1rem;
+            border: 1px solid gray;
+            margin: 1rem;
+            padding: 1rem;
+            width: 13rem;
+            background-color: rgba(255,255,255,0.9);
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        input[type="button"] {
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+        }
+        a {
+            color: #B10000;
+            font-weight: bold;
+            text-align: center;
+        }
+    }
+}
