@@ -12,10 +12,13 @@ function go(){
 //
 const taskList = JSON.parse(localStorage.getItem('taskList')) || [];
 
-function addTask(cliente, sexo, especialidad, dueDate) {
+function addTask(cliente, sexo, telefono, mail, observaciones, especialidad, dueDate) {
     const task = {
         cliente,
         sexo,
+        telefono,
+        mail,
+        observaciones,
         especialidad,
         dueDate,
         complete: false,
@@ -47,19 +50,22 @@ function renderTasks() {
             <div>
               <h2>Paciente: ${task.cliente}</h2>
               <p>Sexo: ${task.sexo}</p>
+              <p>Telefono: ${task.telefono}</p>
+              <p>Correo electronico: ${task.mail}</p>
+              <p>Observaciones: ${task.observaciones}</p>
               <p>Especielidad: ${task.especialidad}</p>
-              <p>Due Date: ${task.dueDate}</p>
-              <p>Caducada: ${task.complete}</p>
+              <p>Fecha de cita: ${task.dueDate}</p>
+              <p>Confirmada: ${task.complete}</p>
             </div>
         `;
         const completeButton = document.createElement("button");
-        completeButton.innerHTML = "Complete";
+        completeButton.innerHTML = "Confirmada";
         completeButton.addEventListener("click", function() {
             markAsComplete(i);
         });
         li.appendChild(completeButton);
         const removeButton = document.createElement("button");
-        removeButton.innerHTML = "Remove";
+        removeButton.innerHTML = "Cancelar";
         removeButton.addEventListener("click", function() {
             removeTask(i);
         });
@@ -68,18 +74,26 @@ function renderTasks() {
     }
 }
 
+
+
 function init() {
     const taskForm = document.getElementById("task-form");
     taskForm.addEventListener("submit", function(event) {
         event.preventDefault();
         const clienteInput = document.getElementById("cliente-input");
         const sexoInput = document.getElementById("sexo-input");
+        const telefonoInput = document.getElementById("telefono-input");
+        const mailInput = document.getElementById("mail-input");
+        const observacionesInput = document.getElementById("observaciones-input");
         const especialidadInput = document.getElementById("especialidad-input");
         const dueDateInput = document.getElementById("due-date-input");
         
-        addTask(clienteInput.value, sexoInput.value, especialidadInput.value, dueDateInput.value);
+        addTask(clienteInput.value, sexoInput.value, telefonoInput.value, mailInput.value, observacionesInput.value, especialidadInput.value, dueDateInput.value);
         clienteInput.value = "";
         sexoInput.value = "";
+        telefonoInput.value = "";
+        mailInput.value = "";
+        observacionesInput.value = "";
         especialidadInput.value = "";
         dueDateInput.value = "";
           renderTasks();
