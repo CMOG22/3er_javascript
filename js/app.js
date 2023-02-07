@@ -12,7 +12,7 @@ function go(){
 //
 const taskList = JSON.parse(localStorage.getItem('taskList')) || [];
 
-function addTask(cliente, sexo, telefono, mail, observaciones, especialidad, price, dueDate) {
+function addTask(cliente, sexo, telefono, mail, observaciones, especialidad, dueDate) {
     const task = {
         cliente,
         sexo,
@@ -20,7 +20,6 @@ function addTask(cliente, sexo, telefono, mail, observaciones, especialidad, pri
         mail,
         observaciones,
         especialidad,
-        price,
         dueDate,
         complete: false,
     };
@@ -57,7 +56,6 @@ function renderTasks() {
               <p>Correo electronico: <a href="mailto:${task.mail}">${task.mail}</a></p>
               <p>Observaciones: ${task.observaciones}</p>
               <p>Especielidad: ${task.especialidad}</p>
-              <p>Total: ${task.price}</p>
               <p>Fecha de cita: ${task.dueDate}</p>
               <p>Confirmada: ${task.complete}</p>
             </div>
@@ -90,7 +88,6 @@ function init() {
         const mailInput = document.getElementById("mail-input");
         const observacionesInput = document.getElementById("observaciones-input");
         const especialidadInput = document.getElementById("especialidad-input");
-        const priceInput = document.getElementById("price-input");
         const dueDateInput = document.getElementById("due-date-input");
 
         
@@ -105,14 +102,13 @@ function init() {
            return;
         }
 
-        addTask(clienteInput.value, sexoInput.value, telefonoInput.value, mailInput.value, observacionesInput.value, especialidadInput.value, priceInput.value,dueDateInput.value);
+        addTask(clienteInput.value, sexoInput.value, telefonoInput.value, mailInput.value, observacionesInput.value, especialidadInput.value, dueDateInput.value);
         clienteInput.value = "";
         sexoInput.value = "";
         telefonoInput.value = "";
         mailInput.value = "";
         observacionesInput.value = "";
         especialidadInput.value = "";
-        priceInput.value = "";
         dueDateInput.value = "";
           renderTasks();
     });
