@@ -12,7 +12,7 @@ function go(){
 //
 const taskList = JSON.parse(localStorage.getItem('taskList')) || [];
 
-function addTask(cliente, sexo, telefono, mail, observaciones, especialidad, dueDate) {
+function addTask(cliente, sexo, telefono, mail, observaciones, especialidad, price, dueDate) {
     const task = {
         cliente,
         sexo,
@@ -20,6 +20,7 @@ function addTask(cliente, sexo, telefono, mail, observaciones, especialidad, due
         mail,
         observaciones,
         especialidad,
+        price,
         dueDate,
         complete: false,
     };
@@ -27,6 +28,8 @@ function addTask(cliente, sexo, telefono, mail, observaciones, especialidad, due
     localStorage.setItem('taskList', JSON.stringify(taskList));
     return task;
 }
+
+
 
 function markAsComplete(taskIndex) {
     taskList[taskIndex].complete = true;
@@ -50,10 +53,11 @@ function renderTasks() {
             <div>
               <h2>Paciente: ${task.cliente}</h2>
               <p>Sexo: ${task.sexo}</p>
-              <p>Telefono: ${task.telefono}</p>
-              <p>Correo electronico: ${task.mail}</p>
+              <p>Telefono: <a href="tel:${task.telefono}">${task.telefono}</a></p>
+              <p>Correo electronico: <a href="mailto:${task.mail}">${task.mail}</a></p>
               <p>Observaciones: ${task.observaciones}</p>
               <p>Especielidad: ${task.especialidad}</p>
+              <p>Total: ${task.price}</p>
               <p>Fecha de cita: ${task.dueDate}</p>
               <p>Confirmada: ${task.complete}</p>
             </div>
@@ -86,21 +90,34 @@ function init() {
         const mailInput = document.getElementById("mail-input");
         const observacionesInput = document.getElementById("observaciones-input");
         const especialidadInput = document.getElementById("especialidad-input");
+        const priceInput = document.getElementById("price-input");
         const dueDateInput = document.getElementById("due-date-input");
+
         
-        addTask(clienteInput.value, sexoInput.value, telefonoInput.value, mailInput.value, observacionesInput.value, especialidadInput.value, dueDateInput.value);
+        if (clienteInput.value.trim() === "")  {
+            alert("cliente esta vacio");
+        }if (telefonoInput.value.trim() === "")  {
+            alert("Telefono esta vacio");
+        }if (mailInput.value.trim() === "")  {
+            alert("correo electronico esta vacio");
+        }if (dueDateInput.value.trim() === "")  {
+            alert("fecha de cita esta vacio");
+           return;
+        }
+
+        addTask(clienteInput.value, sexoInput.value, telefonoInput.value, mailInput.value, observacionesInput.value, especialidadInput.value, priceInput.value,dueDateInput.value);
         clienteInput.value = "";
         sexoInput.value = "";
         telefonoInput.value = "";
         mailInput.value = "";
         observacionesInput.value = "";
         especialidadInput.value = "";
+        priceInput.value = "";
         dueDateInput.value = "";
           renderTasks();
     });
-    //addTask("César", "masculino", "General", "02/02/2023");
-    //addTask("Miriam", "Femenino", "Psicologo", "01/03/2023");
     renderTasks();
-  }
+}
 
+  
   init();
